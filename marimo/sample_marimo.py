@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.11.25"
+__generated_with = "0.11.26"
 app = marimo.App(width="medium", app_title="roboquant demo")
 
 
@@ -76,9 +76,16 @@ def _(account, mo):
 
 @app.cell
 def _(account, mo, pd):
-    df = pd.DataFrame(account.get_position_list())
-    mo.md(f"## Open Positions {mo.as_html(df)}")
-    return (df,)
+    df_orders = pd.DataFrame(account.get_order_list())
+    mo.md(f"## Open Orders {mo.as_html(df_orders)}")
+    return (df_orders,)
+
+
+@app.cell
+def _(account, mo, pd):
+    df_positions = pd.DataFrame(account.get_position_list())
+    mo.md(f"## Open Positions {mo.as_html(df_positions)}")
+    return (df_positions,)
 
 
 @app.cell
