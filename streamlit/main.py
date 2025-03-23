@@ -1,6 +1,5 @@
 import streamlit as st
 import roboquant as rq
-from matplotlib import pyplot as plt
 import pandas as pd
 
 
@@ -19,12 +18,14 @@ if st.button("Load Data", type="primary"):
     st.session_state.feed = feed
     
 if feed := st.session_state.get("feed"):
+    assert isinstance(feed, rq.feeds.YahooFeed)
     st.markdown("## Price Viewer")
     assets = {asset.symbol:asset for asset in feed.assets()}
     symbol = st.selectbox("Symbol", options=assets.keys())
-    fig, ax = plt.subplots()
-    feed.plot(assets[symbol], ax=ax)
-    st.pyplot(fig)
+    asset = assets[symbol]
+
+    x, y = feed.get_prices(asset)
+    st.line_chart({"time": x, "price": y}, x="time", y="price")
 
     if st.button("Run Back Test", type="primary"):
         strategy = rq.strategies.EMACrossover()
@@ -44,8 +45,8 @@ if feed := st.session_state.get("feed"):
         st.write(df)
 
     if journal := st.session_state.get("journal"):
+        assert isinstance(journal, rq.journals.MetricsJournal)
         st.markdown("## Metrics")
         metric_name = st.selectbox("Metric", options=journal.get_metric_names())
-        fig, ax = plt.subplots()
-        journal.plot(metric_name, ax=ax)
-        st.pyplot(fig)
+        x, y = journal.get_metric(metric_name)
+        st.line_chart({"time": x, "values": y}, x="time", y="values")

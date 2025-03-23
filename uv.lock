@@ -993,7 +993,7 @@ wheels = [
 
 [[package]]
 name = "roboquant"
-version = "1.6.0"
+version = "1.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
@@ -1002,9 +1002,9 @@ dependencies = [
     { name = "websocket-client" },
     { name = "yfinance" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/89/72/f206058262685ed9e9dee69434f4fa108d1bfcd9a7f18cd4af7c3a9c4991/roboquant-1.6.0.tar.gz", hash = "sha256:400c4f86e3e64a582a00cf8bec82056d6d96a0e302f15ee12b59bf1e69b2cab7", size = 695069 }
+sdist = { url = "https://files.pythonhosted.org/packages/d5/ce/73d167a44335054b9be934903226891aef2770da8f5ca37d0b0e9c837276/roboquant-1.6.1.tar.gz", hash = "sha256:e23a4c75e3c75252cbf1406c5a672329f592fddba2b6ff4e61a16db162a3d2f0", size = 695071 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0f/b4/e33678cb17c4b60d8e3824815f2b4f36e30e1779c9675b00dc5f565a1e71/roboquant-1.6.0-py3-none-any.whl", hash = "sha256:f252fbacb70f610ddab310856b5eddb432f6962552f1d8e5a5078e698a79eb47", size = 86191 },
+    { url = "https://files.pythonhosted.org/packages/48/8c/ef1e1db68ec1426c293d3f83cb0e308559d44e981b1e31545c45304e0cf9/roboquant-1.6.1-py3-none-any.whl", hash = "sha256:ca6740a69a429da7f79ebf994169fdb9ff9d9b9d10d17aeae6daca1ce3207021", size = 86188 },
 ]
 
 [[package]]
@@ -1026,7 +1026,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.10.1" },
     { name = "numpy", specifier = ">=2.2.4" },
     { name = "pandas", specifier = ">=2.2.3" },
-    { name = "roboquant", specifier = ">=1.6.0" },
+    { name = "roboquant", specifier = ">=1.6.1" },
     { name = "streamlit", specifier = ">=1.43.2" },
 ]
 
