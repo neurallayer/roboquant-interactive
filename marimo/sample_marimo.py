@@ -7,8 +7,8 @@ app = marimo.App(width="medium", app_title="roboquant demo")
 @app.cell
 async def _():
     import marimo as mo
-    import micropip
-    await micropip.install("roboquant==1.5.1")
+    import micropip # type: ignore
+    await micropip.install("roboquant==1.6.0")
     import roboquant as rq
     import pandas as pd
     from matplotlib import pyplot as plt
@@ -76,7 +76,7 @@ def _(account, mo):
 
 @app.cell
 def _(account, mo, pd):
-    df = pd.DataFrame(account.get_positions_list())
+    df = pd.DataFrame(account.get_position_list())
     mo.md(f"## Open Positions {mo.as_html(df)}")
     return (df,)
 

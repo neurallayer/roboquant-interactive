@@ -36,8 +36,11 @@ if feed := st.session_state.get("feed"):
     if  account := st.session_state.get("account"):
         st.markdown("## Account")
         st.write(account)
-        df = pd.DataFrame(account.get_positions_list())
+        st.markdown("## Open Orders")
+        df = pd.DataFrame(account.get_order_list())
+        st.write(df)
         st.markdown("## Open Positions")
+        df = pd.DataFrame(account.get_position_list())
         st.write(df)
 
     if journal := st.session_state.get("journal"):
