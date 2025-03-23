@@ -13,8 +13,13 @@ So whether you are a beginning retail trader or an established trading firm, rob
 
 
 # Usage
-This repo contains a number of Python Jupyter Notebooks that demonstrate how to use roboquant. If you don't want to install anything locally, you can try-out roboquant in an online Jupyter environment like
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/neurallayer/roboquant-notebooks/blob/main/intro_roboquant.ipynb)
+This repo contains a number of Python applications that demonstrate how to use roboquant in an interactive environment. There are examples for Jupyter Notebooks, Marimo Notebooks and Streamlit applications.
+
+
+If you don't want to install anything locally, you can try-out many of the examples in an online environments like:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/neurallayer/roboquant-interactive/blob/main/jupyter/intro_roboquant.ipynb)
+
 
 Otherwise, you can install roboquant locally. For example:
 
@@ -27,7 +32,7 @@ See also the [roboquant.py GitHub repository](https://github.com/neurallayer/rob
 
 
 ## License
-These notebooks are made available under the Apache 2.0 license. You can read more about the Apache 2.0 license on this page: https://www.apache.org/licenses/LICENSE-2.0.html
+These samples are made available under the Apache 2.0 license. You can read more about the Apache 2.0 license on this page: https://www.apache.org/licenses/LICENSE-2.0.html
 
 ## Disclaimer
 Absolutely no warranty is implied with this product. Use at your own risk. I provide no guarantee that it will be profitable, or that it won't lose all your money very quickly or doesn't contain bugs. All financial trading offers the possibility of loss. Leveraged trading, may result in you losing all your money, and still owing more. Backtested results are no guarantee of future performance. I can take no responsibility for any losses caused by live trading using roboquant. Use at your own risk. I am not registered or authorised by any financial regulator.
