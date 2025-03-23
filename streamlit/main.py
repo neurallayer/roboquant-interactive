@@ -35,6 +35,7 @@ if feed := st.session_state.get("feed"):
         st.session_state.journal = journal
 
     if  account := st.session_state.get("account"):
+        assert isinstance(account, rq.Account)
         st.markdown("## Account")
         st.write(account)
         st.markdown("## Open Orders")
