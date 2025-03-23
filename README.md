@@ -13,13 +13,16 @@ So whether you are a beginning retail trader or an established trading firm, rob
 
 
 # Usage
-This repo contains a number of Python applications that demonstrate how to use roboquant in an interactive environment. There are examples for Jupyter Notebooks, Marimo Notebooks and Streamlit applications.
+This repo contains a number of Python applications that demonstrate how to use roboquant in an interactive development environment. There are examples for `Jupyter notebooks`, `marimo notebooks` and `Streamlit apps`.
 
 
-If you don't want to install anything locally, you can try-out many of the examples in an online environments like:
+If you don't want to install anything locally, you can try-out some of the examples in an online environments by clicking one of the links below:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/neurallayer/roboquant-interactive/blob/main/jupyter/intro_roboquant.ipynb)
 
+[![Open with marimo](https://marimo.io/shield.svg)](https://marimo.app/github.com/neurallayer/roboquant-interactive/blob/main/marimo/sample_marimo.py)
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://roboquant.streamlit.app)
 
 Otherwise, you can install roboquant locally. For example:
 
