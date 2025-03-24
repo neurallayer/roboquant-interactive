@@ -92,7 +92,7 @@ def _(account, mo, pd):
 def _(journal, mo):
     options = list(journal.get_metric_names())
     radio = mo.ui.radio(options=options, value = "pnl/equity", label="Select a metric")
-    mo.md(f"## Metrics")
+    mo.md("## Metrics")
     return options, radio
 
 

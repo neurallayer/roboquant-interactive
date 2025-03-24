@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit.web.bootstrap import run
 import roboquant as rq
 import pandas as pd
 
@@ -9,18 +10,18 @@ st.markdown("## Feed Configuration")
 start_date = st.date_input("Start Date", value="2010-01-01")
 symbols_str = st.text_input("Symbols", value="TSLA, IBM, AAPL, MSFT, JPM, GOOGL")
 
-symbols = [s.strip() for s in symbols_str.split(",")]
+symbols = [s.strip().upper() for s in symbols_str.split(",")]
 feed = rq.feeds.YahooFeed(*symbols, start_date=str(start_date))
 
 if st.button("Load Data", type="primary"):
-    feed = rq.feeds.YahooFeed(*symbols, start_date=str(start_date))
+    feed = rq.feeds.YahooFeed(*symbols, start_date=start_date)
     st.session_state.clear()
     st.session_state.feed = feed
-    
+
 if feed := st.session_state.get("feed"):
     assert isinstance(feed, rq.feeds.YahooFeed)
     st.markdown("## Price Viewer")
-    assets = {asset.symbol:asset for asset in feed.assets()}
+    assets = {asset.symbol: asset for asset in feed.assets()}
     symbol = st.selectbox("Symbol", options=assets.keys())
     asset = assets[symbol]
 
@@ -34,7 +35,7 @@ if feed := st.session_state.get("feed"):
         st.session_state.account = account
         st.session_state.journal = journal
 
-    if  account := st.session_state.get("account"):
+    if account := st.session_state.get("account"):
         assert isinstance(account, rq.Account)
         st.markdown("## Account")
         st.write(account)
@@ -51,3 +52,10 @@ if feed := st.session_state.get("feed"):
         metric_name = st.selectbox("Metric", options=journal.get_metric_names())
         x, y = journal.get_metric(metric_name)
         st.line_chart({"time": x, "values": y}, x="time", y="values")
+
+if __name__ == "__main__":
+
+    # this file will run itself, but the second time this check is False 
+    # to stop the startup of a second instance
+    if '__streamlitmagic__' not in locals():
+        run(__file__, False, [], {})

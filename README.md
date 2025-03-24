@@ -13,7 +13,7 @@ So whether you are a beginning retail trader or an established trading firm, rob
 
 
 # Usage
-This repo contains a number of Python applications that demonstrate how to use roboquant in an interactive development environment. There are examples for `Jupyter notebooks`, `marimo notebooks` and `Streamlit apps`.
+This repo contains a number of Python applications that demonstrate how to use roboquant in an interactive environment. There are examples for `Jupyter notebooks`, `marimo notebooks` and `Streamlit apps`.
 
 
 If you don't want to install anything locally, you can try-out some of the examples in an online environments by clicking one of the links below:
