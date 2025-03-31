@@ -8,7 +8,8 @@ app = marimo.App(width="medium", app_title="roboquant demo")
 async def _():
     import marimo as mo
     import micropip # type: ignore
-    await micropip.install("roboquant==1.6.0")
+    micropip.uninstall("roboquant")
+    await micropip.install("roboquant==1.6.3")
     import roboquant as rq
     import pandas as pd
     from matplotlib import pyplot as plt
