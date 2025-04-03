@@ -9,7 +9,7 @@ async def _():
     import marimo as mo
     import micropip # type: ignore
     micropip.uninstall("roboquant")
-    await micropip.install("roboquant==1.6.3")
+    await micropip.install("roboquant==1.7.0")
     import roboquant as rq
     import pandas as pd
     from matplotlib import pyplot as plt
