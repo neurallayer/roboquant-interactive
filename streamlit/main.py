@@ -9,9 +9,7 @@ st.title(f"roboquant version {rq.__version__}")
 st.markdown("## Feed Configuration")
 start_date = st.date_input("Start Date", value="2010-01-01")
 symbols_str = st.text_input("Symbols", value="TSLA, IBM, AAPL, MSFT, JPM, GOOGL")
-
 symbols = [s.strip().upper() for s in symbols_str.split(",")]
-feed = rq.feeds.YahooFeed(*symbols, start_date=str(start_date))
 
 if st.button("Load Data", type="primary"):
     feed = rq.feeds.YahooFeed(*symbols, start_date=start_date)
