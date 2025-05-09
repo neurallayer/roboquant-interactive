@@ -1,12 +1,13 @@
 import marimo
 
-__generated_with = "0.11.26"
+__generated_with = "0.13.6"
 app = marimo.App(width="medium", app_title="roboquant demo")
 
 
 @app.cell
 async def _():
     import marimo as mo
+    import altair as alt
     import micropip # type: ignore
     micropip.uninstall("roboquant")
     await micropip.install("roboquant")
@@ -15,7 +16,7 @@ async def _():
     from matplotlib import pyplot as plt
     plt.rcParams["figure.figsize"] = (10,6)
     mo.md(f"# roboquant version {rq.__version__}")
-    return micropip, mo, pd, plt, rq
+    return alt, mo, pd, rq
 
 
 @app.cell
@@ -37,17 +38,28 @@ def _(rq, start_date, symbols_input):
 def _(assets, mo):
     asset_options = { asset.symbol:asset for asset in assets}
     asset_selector = mo.ui.dropdown(asset_options, value = assets[0].symbol, label = "Select a symbol")
-    return asset_options, asset_selector
+    return (asset_selector,)
 
 
 @app.cell
-def _(asset_selector, feed, mo, plt):
-    feed.plot(asset_selector.value)
+def _(alt, asset_selector, feed, mo):
+    data = feed.to_dataframe(asset_selector.value).reset_index(names="time")
+    chart = alt.Chart(data).mark_line().encode(
+        x='time',
+        y='Close'
+    )
+    chart = mo.ui.altair_chart(chart, chart_selection="interval")
 
+    return (chart,)
+
+
+@app.cell
+def _(asset_selector, chart, mo):
     mo.vstack([
         mo.md("## Stock Price Viewer"), 
         asset_selector,
-        mo.mpl.interactive(plt.gca())
+        chart,
+        chart.value
     ])
     return
 
@@ -66,12 +78,12 @@ def _(feed, mo, rq, run_button):
     strat = rq.strategies.EMACrossover()
     journal = rq.journals.MetricsJournal.pnl()
     account = rq.run(feed, strat, journal=journal)
-    return account, journal, strat
+    return account, journal
 
 
 @app.cell
 def _(account, mo):
-    mo.md(f"## Account \n<pre>{account}</pre>")
+    mo.md(f"""## Account \n<pre>{account}</pre>""")
     return
 
 
@@ -79,14 +91,14 @@ def _(account, mo):
 def _(account, mo, pd):
     df_orders = pd.DataFrame(account.get_order_list())
     mo.md(f"## Open Orders {mo.as_html(df_orders)}")
-    return (df_orders,)
+    return
 
 
 @app.cell
 def _(account, mo, pd):
     df_positions = pd.DataFrame(account.get_position_list())
     mo.md(f"## Open Positions {mo.as_html(df_positions)}")
-    return (df_positions,)
+    return
 
 
 @app.cell
@@ -94,18 +106,30 @@ def _(journal, mo):
     options = list(journal.get_metric_names())
     radio = mo.ui.radio(options=options, value = "pnl/equity", label="Select a metric")
     mo.md("## Metrics")
-    return options, radio
+    return (radio,)
 
 
 @app.cell
-def _(journal, mo, plt, radio):
-    journal.plot(radio.value)
+def _(alt, journal, mo, radio):
+    df = journal.to_dataframe(radio.value)
+    metric_chart = alt.Chart(df).mark_line().encode(
+        x="time",
+        y="value"
+    )
 
-    mo.hstack(
-        [
-            radio, 
-            mo.mpl.interactive(plt.gca())
-        ], widths=[1, 4])
+    metric_chart = mo.ui.altair_chart(metric_chart, chart_selection="interval")
+    return (metric_chart,)
+
+
+@app.cell
+def _(metric_chart, mo, radio):
+    mo.hstack([
+        radio, 
+        mo.vstack([
+            metric_chart,
+            metric_chart.value
+        ])    
+    ], widths=[1, 4])
     return
 
 

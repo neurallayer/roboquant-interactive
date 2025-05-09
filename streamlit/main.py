@@ -12,9 +12,8 @@ symbols_str = st.text_input("Symbols", value="TSLA, IBM, AAPL, MSFT, JPM, GOOGL"
 symbols = [s.strip().upper() for s in symbols_str.split(",")]
 
 if st.button("Load Data", type="primary"):
-    feed = rq.feeds.YahooFeed(*symbols, start_date=start_date)
     st.session_state.clear()
-    st.session_state.feed = feed
+    st.session_state.feed = rq.feeds.YahooFeed(*symbols, start_date=start_date)
 
 if feed := st.session_state.get("feed"):
     assert isinstance(feed, rq.feeds.YahooFeed)
@@ -26,8 +25,13 @@ if feed := st.session_state.get("feed"):
     x, y = feed.get_prices(asset)
     st.line_chart({"time": x, "price": y}, x="time", y="price")
 
+    st.markdown("## Back Test Config")
+    strategies = { f"EMA-{x}-{y}" : (x, y) for (x, y) in [(3,5), (7,15), (12, 25), (25, 50)]}
+    strategy_name = st.selectbox("Strategy", options=strategies.keys())
+    strategy_params = strategies[strategy_name]
+
     if st.button("Run Back Test", type="primary"):
-        strategy = rq.strategies.EMACrossover()
+        strategy = rq.strategies.EMACrossover(*strategy_params)
         journal = rq.journals.MetricsJournal.pnl()
         account = rq.run(feed, strategy, journal=journal)
         st.session_state.account = account
