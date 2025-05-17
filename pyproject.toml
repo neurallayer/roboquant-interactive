@@ -6,10 +6,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "altair>=5.5.0",
+    "ipykernel>=6.29.5",
     "marimo>=0.13.6",
     "matplotlib>=3.10.1",
     "numpy>=2.2.4",
     "pandas>=2.2.3",
-    "roboquant[yahoo]>=1.9.3",
+    "roboquant>=1.9.6",
     "streamlit>=1.44.1",
 ]

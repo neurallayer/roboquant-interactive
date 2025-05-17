@@ -5,12 +5,9 @@ app = marimo.App(width="medium", app_title="roboquant demo")
 
 
 @app.cell
-async def _():
+def _():
     import marimo as mo
     import altair as alt
-    import micropip # type: ignore
-    micropip.uninstall("roboquant")
-    await micropip.install("roboquant")
     import roboquant as rq
     import pandas as pd
     from matplotlib import pyplot as plt

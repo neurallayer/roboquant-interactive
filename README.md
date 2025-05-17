@@ -20,8 +20,6 @@ If you don't want to install anything locally, you can try-out some of the examp
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/neurallayer/roboquant-interactive/blob/main/jupyter/intro_roboquant.ipynb)
 
-[![Open with marimo](https://marimo.io/shield.svg)](https://marimo.app/github.com/neurallayer/roboquant-interactive/blob/main/marimo/sample_marimo.py)
-
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://roboquant.streamlit.app)
 
 Otherwise, you can install roboquant locally. For example:
